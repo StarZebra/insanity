@@ -10,7 +10,7 @@ import net.minecraft.util.ChatComponentText;
 public class ItemUpdateFixCommand extends CommandBase {
     @Override
     public String getCommandName() {
-        return "itemtoggle";
+        return "drill";
     }
 
     @Override

@@ -1,6 +1,6 @@
 {
   "package": "me.starzebra.mixin",
-  "refmap": "mixins.examplemod.refmap.json",
+  "refmap": "mixins.insanity.refmap.json",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
