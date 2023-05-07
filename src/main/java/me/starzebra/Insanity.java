@@ -23,7 +23,7 @@ public class Insanity {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Display.setTitle("Insanity - 1.8.9");
+        Display.setTitle("Insanity - 1.8.9 ");
         registerEvent(new RotationUtils());
         registerEvent(new ItemUpdateFix());
     }
