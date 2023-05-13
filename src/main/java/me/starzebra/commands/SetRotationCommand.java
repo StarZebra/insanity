@@ -50,11 +50,6 @@ public class SetRotationCommand extends CommandBase {
             return;
         }
 
-        if(Math.ceil(Math.abs(newYaw)) + Math.ceil(Math.abs(player.rotationYaw)) == 180 || Math.ceil(Math.abs(player.rotationPitch)) + Math.ceil(Math.abs(newPitch)) == 180) {
-            player.addChatMessage(new ChatComponentText("§f[§4I§f]§c You can't rotate 180 degrees!"));
-            return;
-        }
-
         RotationUtils.Rotation rotation = new RotationUtils.Rotation(newPitch, newYaw);
 
         RotationUtils.smartLook(rotation, 7, () -> {});
