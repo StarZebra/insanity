@@ -20,4 +20,9 @@ public class ItemUtils {
         if (!item.hasTagCompound()) return null;
         return item.getSubCompound("ExtraAttributes", false);
     }
+
+//    public static String stripFormatting(String string) {
+//        return string.replaceAll("§.", "");
+//    }
+
 }

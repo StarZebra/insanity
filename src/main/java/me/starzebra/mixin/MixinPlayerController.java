@@ -1,5 +1,6 @@
 package me.starzebra.mixin;
 
+import me.starzebra.Insanity;
 import me.starzebra.features.ItemUpdateFix;
 import me.starzebra.utils.ItemUtils;
 import me.starzebra.utils.ReflectionUtils;
@@ -11,7 +12,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,8 +33,10 @@ public class MixinPlayerController {
 
     }
 
-    @Inject(method = "clickBlock", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "clickBlock", at = @At(value = "HEAD"))
     private void onPlayerDamageBlock(BlockPos loc, EnumFacing face, CallbackInfoReturnable<Boolean> cir){
+        if(Insanity.fungiCooldown > 0) return;
+
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayerSP player = mc.thePlayer;
         ItemStack heldItem = player.getHeldItem();
@@ -43,19 +45,18 @@ public class MixinPlayerController {
         if(heldItem == null) return;
         if(!Objects.equals(ItemUtils.getSkyblockItemID(heldItem), "FUNGI_CUTTER")) return;
 
-        String toolMode = getFungiToolMode(heldItem);
+        String fungiMode = getFungiToolMode(heldItem);
 
         if (block.equals(Blocks.red_mushroom)) {
-            if (toolMode.equals("RED")) return;
+            if (fungiMode.equals("RED")) return;
             ReflectionUtils.click(ReflectionUtils.ClickType.RIGHT);
-
+            Insanity.fungiCooldown = 40;
 
         } else if (block.equals(Blocks.brown_mushroom)) {
-            if (toolMode.equals("BROWN")) return;
+            if (fungiMode.equals("BROWN")) return;
             ReflectionUtils.click(ReflectionUtils.ClickType.RIGHT);
-
+            Insanity.fungiCooldown = 40;
         }
-
 
     }
 
