@@ -39,22 +39,24 @@ public class MixinPlayerController {
         EntityPlayerSP player = mc.thePlayer;
         ItemStack heldItem = player.getHeldItem();
         Block block = mc.theWorld.getBlockState(loc).getBlock();
+
         if(heldItem == null) return;
-        if(block.equals(Blocks.brown_mushroom) || block.equals(Blocks.red_mushroom)){
-            if(!Objects.equals(ItemUtils.getSkyblockItemID(heldItem), "FUNGI_CUTTER")) return;
-            String toolMode = getFungiToolMode(heldItem);
+        if(!Objects.equals(ItemUtils.getSkyblockItemID(heldItem), "FUNGI_CUTTER")) return;
 
-            if (block.equals(Blocks.red_mushroom)) {
-                if (toolMode.equals("RED")) return;
-                ReflectionUtils.invoke(Minecraft.getMinecraft(), "rightClickMouse");
+        String toolMode = getFungiToolMode(heldItem);
 
-            } else if (block.equals(Blocks.brown_mushroom)) {
-                if (toolMode.equals("BROWN")) return;
-                ReflectionUtils.invoke(Minecraft.getMinecraft(), "rightClickMouse");
-            }
+        if (block.equals(Blocks.red_mushroom)) {
+            if (toolMode.equals("RED")) return;
+            ReflectionUtils.click(ReflectionUtils.ClickType.RIGHT);
 
-            player.addChatMessage(new ChatComponentText("[§4I§r] Switched fungi cutter mode!"));
+
+        } else if (block.equals(Blocks.brown_mushroom)) {
+            if (toolMode.equals("BROWN")) return;
+            ReflectionUtils.click(ReflectionUtils.ClickType.RIGHT);
+
         }
+
+
     }
 
     private String getFungiToolMode(ItemStack item){
