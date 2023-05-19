@@ -1,7 +1,9 @@
 package me.starzebra;
 
+import me.starzebra.commands.AutoClickerCommand;
 import me.starzebra.commands.ItemUpdateFixCommand;
 import me.starzebra.commands.SetRotationCommand;
+import me.starzebra.features.AutoClicker;
 import me.starzebra.features.ItemUpdateFix;
 import me.starzebra.utils.RotationUtils;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -22,6 +24,7 @@ public class Insanity {
     public void preInit(FMLPreInitializationEvent event){
         ClientCommandHandler.instance.registerCommand(new SetRotationCommand());
         ClientCommandHandler.instance.registerCommand(new ItemUpdateFixCommand());
+        ClientCommandHandler.instance.registerCommand(new AutoClickerCommand());
     }
 
     @Mod.EventHandler
@@ -29,6 +32,7 @@ public class Insanity {
         Display.setTitle("Insanity - 1.8.9");
         registerEvent(new RotationUtils());
         registerEvent(new ItemUpdateFix());
+        registerEvent(new AutoClicker());
         registerEvent(this);
     }
 
