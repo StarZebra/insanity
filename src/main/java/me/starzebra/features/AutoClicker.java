@@ -4,6 +4,7 @@ import me.starzebra.events.ClickEvent;
 import me.starzebra.utils.ReflectionUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class AutoClicker {
@@ -29,11 +30,15 @@ public class AutoClicker {
         if(mc.thePlayer == null) return;
         if(mc.currentScreen != null && mc.thePlayer.isUsingItem()) return;
         long nowMillis = System.currentTimeMillis();
-
         if(enabled && mc.gameSettings.keyBindAttack.isKeyDown() && nowMillis >= nextleftClick){
             ReflectionUtils.click(ReflectionUtils.ClickType.LEFT);
 
         }
 
+    }
+
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event){
+        enabled = false;
     }
 }

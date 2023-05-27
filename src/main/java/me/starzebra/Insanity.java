@@ -6,6 +6,7 @@ import me.starzebra.commands.SetRotationCommand;
 import me.starzebra.features.AutoClicker;
 import me.starzebra.features.ItemUpdateFix;
 import me.starzebra.utils.RotationUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -15,8 +16,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.Display;
 
-@Mod(modid = "insanity", version = "0.1", clientSideOnly = true)
+@Mod(modid = Insanity.MODID, version = "0.1", clientSideOnly = true)
 public class Insanity {
+    public static final String MODID = "@ID@";
+    public static Minecraft mc = Minecraft.getMinecraft();
 
     public static int fungiCooldown = 40;
 
