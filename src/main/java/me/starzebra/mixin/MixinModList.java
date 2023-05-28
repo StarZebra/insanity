@@ -19,6 +19,7 @@ public class MixinModList {
 
     @Inject(method = "<init>(Ljava/util/List;)V", at = @At("RETURN"))
     private void removeModID(List<ModContainer> modList, CallbackInfo ci){
+        if(!Insanity.modHider.isToggled()) return;
         if(!Insanity.mc.isIntegratedServerRunning()){
             modTags.remove(Insanity.MODID);
         }

@@ -1,14 +1,10 @@
 package me.starzebra.features;
 
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import me.starzebra.features.feature.Feature;
 
-public class ItemUpdateFix {
 
-    public static boolean toggled = false;
-
-    @SubscribeEvent
-    public void onWorldLoad(WorldEvent.Load event){
-        toggled = false;
+public class ItemUpdateFix extends Feature {
+    public ItemUpdateFix() {
+        super("Item Update Fix", 0, Category.OTHER);
     }
 }

@@ -1,7 +1,6 @@
 package me.starzebra.mixin;
 
 import me.starzebra.Insanity;
-import me.starzebra.features.ItemUpdateFix;
 import me.starzebra.utils.ItemUtils;
 import me.starzebra.utils.ReflectionUtils;
 import net.minecraft.block.Block;
@@ -26,11 +25,8 @@ public class MixinPlayerController {
 
     @Redirect(method = {"isHittingPosition"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;areItemStackTagsEqual(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z"))
     private boolean shouldTagsBeEqual(ItemStack stackA, ItemStack stackB){
-        if(ItemUpdateFix.toggled){
-            return Objects.equals(ItemUtils.getSkyblockItemID(stackA), ItemUtils.getSkyblockItemID(stackB));
-        }
-        return ItemStack.areItemStackTagsEqual(stackA, stackB);
-
+        if(!Insanity.itemUpdateFix.isToggled()) return ItemStack.areItemStackTagsEqual(stackA, stackB);
+        return Objects.equals(ItemUtils.getSkyblockItemID(stackA), ItemUtils.getSkyblockItemID(stackB));
     }
 
     @Inject(method = "clickBlock", at = @At(value = "HEAD"))
