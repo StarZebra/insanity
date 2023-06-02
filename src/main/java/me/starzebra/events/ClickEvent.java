@@ -7,6 +7,9 @@ public class ClickEvent extends Event{
 
     @Cancelable
     public static class LeftClickEvent extends ClickEvent{}
+
+    @Cancelable
+    public static class RightClickEvent extends ClickEvent{}
 }
 
 

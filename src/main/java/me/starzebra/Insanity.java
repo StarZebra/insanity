@@ -22,7 +22,7 @@ import org.lwjgl.opengl.Display;
 import java.io.File;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Mod(modid = Insanity.MODID, name = Insanity.NAME, version = "0.1", clientSideOnly = true)
+@Mod(modid = Insanity.MODID, name = Insanity.NAME, version = "0.2", clientSideOnly = true)
 public class Insanity {
     public static final String MODID = "insanity";
     public static final String NAME = "insanity";
@@ -46,15 +46,15 @@ public class Insanity {
         new File(Insanity.mc.mcDataDir.getPath() + "/config/Insanity").mkdir();
         Display.setTitle("Insanity - 1.8.9");
         Insanity.features.add(Insanity.clickGui);
-        Insanity.features.add(new ItemUpdateFix());
+        Insanity.features.add(itemUpdateFix);
         Insanity.features.add(new AutoClicker());
         Insanity.features.add(modHider);
-        Insanity.features.add(new SoulWhipping());
+        Insanity.features.add(new EasyAOTV());
         //Insanity.features.add(new GemScanner());
 //        Insanity.loadKeybinds();
         for(Feature f: Insanity.features){
             MinecraftForge.EVENT_BUS.register(f);
-            System.out.println("LOADED: " +f.getName());
+            //System.out.println("LOADED: " +f.getName());
         }
 
         registerEvent(new RotationUtils());
@@ -114,6 +114,5 @@ public class Insanity {
         clickGui = new Gui();
         features = new CopyOnWriteArrayList<>();
     }
-
 
 }
