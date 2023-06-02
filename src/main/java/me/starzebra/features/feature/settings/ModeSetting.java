@@ -1,11 +1,16 @@
 package me.starzebra.features.feature.settings;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class ModeSetting extends Setting{
 
+    @Expose
+    @SerializedName("value")
     private String selected;
     private int index;
     private List<String> modes;

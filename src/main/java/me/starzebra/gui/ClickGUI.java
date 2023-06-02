@@ -12,7 +12,6 @@ import me.starzebra.utils.font.Fonts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ChatAllowedCharacters;
-import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -133,15 +132,8 @@ public class ClickGUI extends GuiScreen {
 
     private void handle(int mouseX, int mouseY, int key, float partialTicks, Handle handle){
         int toggled = Insanity.clickGui.getColor().getRGB();
-        float scale = 2.0f / (float) this.mc.gameSettings.guiScale;
         int prevScale = this.mc.gameSettings.guiScale;
         GL11.glPushMatrix();
-        if(this.mc.gameSettings.guiScale > 2 && !Insanity.clickGui.scaleGui.isEnabled()){
-            this.mc.gameSettings.guiScale = 2;
-            mouseX /= (int) scale;
-            mouseY /= (int) scale;
-            GL11.glScaled(scale, scale, scale);
-        }
         for (Panel p : panels){
             switch (handle){
                 case DRAW:
@@ -331,24 +323,24 @@ public class ClickGUI extends GuiScreen {
 
 
 
-            if (p.category == Feature.Category.KEYBINDS) {
-                switch (handle) {
-                    case CLICK: {
-                        if (!this.isHovered(mouseX, mouseY, p.x, y, 15.0, p.width)) break;
-                        Keybind keybind = new Keybind("Keybind " + (Feature.getFeaturesByCategory(Feature.Category.KEYBINDS).size() + 1));
-                        Insanity.features.add(keybind);
-                        MinecraftForge.EVENT_BUS.register(keybind);
-                        keybind.setToggled(true);
-                        break;
-                    }
-                    case DRAW: {
-                        RenderUtils.drawRect(p.x, y, p.x + p.width, y + 15.0f, toggled);
-                        Fonts.robotoMediumBold.drawSmoothCenteredString("Add new keybind", p.x + p.width / 2.0f, y + 7.0f - (float)(Fonts.robotoMediumBold.getHeight() / 2), Color.white.getRGB());
-                        break;
-                    }
-                }
-                y += 15.0f;
-            }
+//            if (p.category == Feature.Category.KEYBINDS) {
+//                switch (handle) {
+//                    case CLICK: {
+//                        if (!this.isHovered(mouseX, mouseY, p.x, y, 15.0, p.width)) break;
+//                        Keybind keybind = new Keybind("Keybind " + (Feature.getFeaturesByCategory(Feature.Category.KEYBINDS).size() + 1));
+//                        Insanity.features.add(keybind);
+//                        MinecraftForge.EVENT_BUS.register(keybind);
+//                        keybind.setToggled(true);
+//                        break;
+//                    }
+//                    case DRAW: {
+//                        RenderUtils.drawRect(p.x, y, p.x + p.width, y + 15.0f, toggled);
+//                        Fonts.robotoMediumBold.drawSmoothCenteredString("Add new keybind", p.x + p.width / 2.0f, y + 7.0f - (float)(Fonts.robotoMediumBold.getHeight() / 2), Color.white.getRGB());
+//                        break;
+//                    }
+//                }
+//                y += 15.0f;
+//            }
             if(handle == Handle.DRAW) {
                 RenderUtils.drawRect(p.x,p.y +3.0f, p.x +p.width, p.y + p.height+3.0f, new Color(toggled).getRGB());
                 for (int i = 0; i < 4; i++) {

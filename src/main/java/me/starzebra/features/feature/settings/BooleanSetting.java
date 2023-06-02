@@ -1,9 +1,14 @@
 package me.starzebra.features.feature.settings;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.function.Predicate;
 
 public class BooleanSetting extends Setting{
 
+    @Expose
+    @SerializedName("value")
     private boolean enabled;
 
     public BooleanSetting(String name, boolean enabled){

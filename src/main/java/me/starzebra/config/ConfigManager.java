@@ -2,6 +2,8 @@ package me.starzebra.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import me.starzebra.Insanity;
 import me.starzebra.features.feature.Feature;
 import me.starzebra.features.feature.Keybind;
@@ -13,15 +15,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigManager {
 
     public static String configPath;
-
-    //TODO: SAVING DOESNT WORK!??! or somethinmg
 
     public static boolean loadConfig(final String configPath) {
         try {
@@ -37,6 +36,7 @@ public class ConfigManager {
                             }
                             catch (Exception e) {
                                 e.printStackTrace();
+                                System.out.println("Toggled issue");
                             }
                             module.setKeycode(configModule.getKeycode());
                             for (final Setting setting : module.settings) {
@@ -162,12 +162,16 @@ public class ConfigManager {
     }
 
     static {
-        ConfigManager.configPath = Insanity.mc.mcDataDir.getPath() + "/config/Insanity/configs/";
+        ConfigManager.configPath = Insanity.mc.mcDataDir.getPath() + "/config/Insanity/configs";
     }
 
     public static class ConfigSetting
     {
+        @Expose
+        @SerializedName("name")
         public String name;
+        @Expose
+        @SerializedName("value")
         public Object value;
 
         public ConfigSetting(final String name, final Object value) {

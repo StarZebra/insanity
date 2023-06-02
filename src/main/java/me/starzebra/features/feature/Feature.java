@@ -1,5 +1,7 @@
 package me.starzebra.features.feature;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import me.starzebra.Insanity;
 import me.starzebra.config.ConfigManager;
 import me.starzebra.features.feature.settings.Setting;
@@ -13,17 +15,25 @@ import java.util.function.Predicate;
 
 public class Feature {
 
+    @Expose
+    @SerializedName("name")
     public String name;
+    @Expose
+    @SerializedName("toggled")
     private boolean toggled;
+    @Expose
+    @SerializedName("keycode")
     private int keycode;
     public boolean extended;
     private final Category category;
+    @Expose
+    @SerializedName("settings")
     public ConfigManager.ConfigSetting[] cfgSettings;
     private boolean devOnly;
     public MilliTimer toggledTime;
     public List<Setting> settings;
 
-    public Feature(String name, int keycode, Category category){
+    public Feature(final String name, int keycode, Category category){
         this.name = name;
         this.keycode = keycode;
         this.category = category;
@@ -31,7 +41,7 @@ public class Feature {
         this.settings = new ArrayList<>();
     }
 
-    public Feature(String name, Category category){
+    public Feature(final String name, Category category){
         this(name, 0, category);
     }
 
@@ -58,11 +68,11 @@ public class Feature {
     }
 
     public Category getCategory() {
-        return category;
+        return this.category;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public boolean isPressed(){

@@ -1,11 +1,15 @@
 package me.starzebra.features.feature.settings;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.function.Predicate;
 
 public class Setting {
 
+    @Expose
+    @SerializedName("name")
     public String name;
-    private boolean hidden;
     private final Predicate<Boolean> predicate;
 
     protected Setting(final String name, final Predicate<Boolean> predicate) {
@@ -15,10 +19,6 @@ public class Setting {
 
     protected Setting(final String name) {
         this(name, null);
-    }
-
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
     }
 
     public boolean isHidden() {

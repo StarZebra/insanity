@@ -1,5 +1,8 @@
 package me.starzebra.features.feature.settings;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.function.Predicate;
 
 public class NumberSetting extends Setting{
@@ -7,6 +10,8 @@ public class NumberSetting extends Setting{
     double min;
     double max;
     double increment;
+    @Expose
+    @SerializedName("value")
     private double value;
 
     public NumberSetting(final String name, final double defaultValue, final double minimum, final double maximum, final double increment) {
