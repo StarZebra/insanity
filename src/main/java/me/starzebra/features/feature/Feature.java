@@ -6,6 +6,7 @@ import me.starzebra.Insanity;
 import me.starzebra.config.ConfigManager;
 import me.starzebra.features.feature.settings.Setting;
 import me.starzebra.utils.MilliTimer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import org.lwjgl.input.Keyboard;
 
@@ -30,6 +31,7 @@ public class Feature {
     @SerializedName("settings")
     public ConfigManager.ConfigSetting[] cfgSettings;
     private boolean devOnly;
+    protected static final Minecraft mc;
     public MilliTimer toggledTime;
     public List<Setting> settings;
 
@@ -172,6 +174,10 @@ public class Feature {
     public void onDisable(){
         if(Insanity.mc.thePlayer == null) return;
         Insanity.mc.thePlayer.addChatMessage(new ChatComponentText("[§4I§r] §d"+ name+ " §r[§cOFF§r]"));
+    }
+
+    static {
+        mc = Minecraft.getMinecraft();
     }
 
     public enum Category {

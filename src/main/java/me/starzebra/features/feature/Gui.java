@@ -30,6 +30,7 @@ public class Gui extends Feature{
     public NumberSetting redCustom;
     public NumberSetting greenCustom;
     public NumberSetting blueCustom;
+    public NumberSetting alphaCustom;
     public NumberSetting redShift1;
     public NumberSetting greenShift1;
     public NumberSetting blueShift1;
@@ -52,6 +53,7 @@ public class Gui extends Feature{
         this.redCustom = new NumberSetting("Red", 0.0, 0.0, 255.0, 1.0, aBoolean -> !this.colorMode.is("Custom") && !this.colorMode.is("Pulse"));
         this.greenCustom = new NumberSetting("Green", 80.0, 0.0, 255.0, 1.0, aBoolean -> !this.colorMode.is("Custom") && !this.colorMode.is("Pulse"));
         this.blueCustom = new NumberSetting("Blue", 255.0, 0.0, 255.0, 1.0, aBoolean -> !this.colorMode.is("Custom") && !this.colorMode.is("Pulse"));
+        this.alphaCustom = new NumberSetting("Alpha", 255, 0, 255, 1, aBoolean -> !this.colorMode.is("Custom") && !this.colorMode.is("Pulse"));
         this.redShift1 = new NumberSetting("Red 1 ", 0.0, 0.0, 255.0, 1.0, aBoolean -> !this.colorMode.is("Color shift"));
         this.greenShift1 = new NumberSetting("Green 1 ", 255.0, 0.0, 255.0, 1.0, aBoolean -> !this.colorMode.is("Color shift"));
         this.blueShift1 = new NumberSetting("Blue 1 ", 110.0, 0.0, 255.0, 1.0, aBoolean -> !this.colorMode.is("Color shift"));
@@ -63,7 +65,7 @@ public class Gui extends Feature{
         this.arrayList = new BooleanSetting("ArrayList", true);
         this.waterMark = new BooleanSetting("Watermark", true);
         this.hsb = new BooleanSetting("HSB ", true, aBoolean -> !this.colorMode.is("Color shift"));
-        this.addSettings(this.colorMode, this.hsb, this.rgbSpeed, this.shiftSpeed, this.redCustom, this.greenCustom, this.blueCustom, this.redShift1, this.greenShift1, this.blueShift1, this.redShift2, this.greenShift2, this.blueShift2, Gui.commandPrefix, this.waterMark, Gui.clientName, this.arrayList);
+        this.addSettings(this.colorMode, this.hsb, this.rgbSpeed, this.shiftSpeed, this.redCustom, this.greenCustom, this.blueCustom, this.alphaCustom, this.redShift1, this.greenShift1, this.blueShift1, this.redShift2, this.greenShift2, this.blueShift2, Gui.commandPrefix, this.waterMark, Gui.clientName, this.arrayList);
     }
 
     public Color getColor(){
@@ -86,7 +88,7 @@ public class Gui extends Feature{
                 return Color.getHSBColor((float)((index * 100.0 + System.currentTimeMillis() * this.rgbSpeed.getValue()) / 5000.0 % 1.0), 0.8f, 1.0f);
             }
             case "Pulse": {
-                final Color baseColor = new Color((int)this.redCustom.getValue(), (int)this.greenCustom.getValue(), (int)this.blueCustom.getValue(), 255);
+                final Color baseColor = new Color((int)this.redCustom.getValue(), (int)this.greenCustom.getValue(), (int)this.blueCustom.getValue(), (int) this.alphaCustom.getValue());
                 return ColorUtils.interpolateColor(baseColor, baseColor.darker().darker(), (float)((Math.sin((index * 450.0 + System.currentTimeMillis() * this.shiftSpeed.getValue()) / 1000.0) + 1.0) * 0.5));
             }
             case "Astolfo": {
@@ -94,7 +96,7 @@ public class Gui extends Feature{
                 return Color.getHSBColor(0.5f + 0.4f * pos, 0.6f, 1.0f);
             }
             default: {
-                return new Color((int)this.redCustom.getValue(), (int)this.greenCustom.getValue(), (int)this.blueCustom.getValue(), 255);
+                return new Color((int)this.redCustom.getValue(), (int)this.greenCustom.getValue(), (int)this.blueCustom.getValue(), (int) this.alphaCustom.getValue());
             }
         }
     }

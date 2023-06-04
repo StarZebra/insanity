@@ -33,6 +33,7 @@ public class Insanity {
     public static CopyOnWriteArrayList<Feature> features;
     public static Gui clickGui;
     public static ModHider modHider= new ModHider();
+    public static CustomName customRank = new CustomName();
     public static boolean devMode;
 
     @Mod.EventHandler
@@ -50,7 +51,7 @@ public class Insanity {
         Insanity.features.add(new AutoClicker());
         Insanity.features.add(modHider);
         Insanity.features.add(new EasyAOTV());
-        //Insanity.features.add(new GemScanner());
+        Insanity.features.add(customRank);
 //        Insanity.loadKeybinds();
         for(Feature f: Insanity.features){
             MinecraftForge.EVENT_BUS.register(f);

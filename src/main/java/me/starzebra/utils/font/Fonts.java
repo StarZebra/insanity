@@ -28,7 +28,8 @@ public class Fonts {
             if (Fonts.fontCache.containsKey(location)) {
                 font = Fonts.fontCache.get(location).deriveFont(0, size);
             } else {
-                InputStream is = Insanity.mc.getResourceManager().getResource(new ResourceLocation("insanity", "fonts/" + location)).getInputStream();
+
+                InputStream is = Insanity.mc.getResourceManager().getResource(new ResourceLocation("insanity:font/"+location)).getInputStream();
                 font = Font.createFont(0, is);
                 Fonts.fontCache.put(location, font);
                 font = font.deriveFont(0, size);
