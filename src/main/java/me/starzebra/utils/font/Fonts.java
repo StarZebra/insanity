@@ -29,7 +29,8 @@ public class Fonts {
                 font = Fonts.fontCache.get(location).deriveFont(0, size);
             } else {
 
-                InputStream is = Insanity.mc.getResourceManager().getResource(new ResourceLocation("insanity:font/"+location)).getInputStream();
+                InputStream is = Insanity.mc.getResourceManager().getResource(new ResourceLocation("insanity:fonts/"+location)).getInputStream();
+
                 font = Font.createFont(0, is);
                 Fonts.fontCache.put(location, font);
                 font = font.deriveFont(0, size);
@@ -46,8 +47,8 @@ public class Fonts {
     public static void bootstrap() {
         Fonts.robotoMediumBold = new MinecraftFontRenderer(Fonts.getFont("robotoMedium.ttf", 19), true, false);
         Fonts.robotoBig = new MinecraftFontRenderer(Fonts.getFont("robotoMedium.ttf", 20), true, false);
-        Fonts.tahomaBold = new MinecraftFontRenderer(Fonts.getFont( "TAHOMAB0.ttf", 22), true, false);
-        Fonts.tahoma = new MinecraftFontRenderer(Fonts.getFont( "TAHOMA_0.ttf", 22), true, false);
+        Fonts.tahomaBold = new MinecraftFontRenderer(Fonts.getFont( "tahomab0.ttf", 22), true, false);
+        Fonts.tahoma = new MinecraftFontRenderer(Fonts.getFont( "tahoma0.ttf", 22), true, false);
         Fonts.tahomaSmall = Fonts.robotoMediumBold;
         Fonts.robotoSmall = new MinecraftFontRenderer(Fonts.getFont( "openSans.ttf", 22), true, false);
     }

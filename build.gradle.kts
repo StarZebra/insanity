@@ -6,7 +6,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "me.starzebra.archloomtemplate"
+group = "starzebra"
 version = "0.2"
 
 // Toolchains:

@@ -32,6 +32,7 @@ public class Insanity {
     public static ItemUpdateFix itemUpdateFix = new ItemUpdateFix();
     public static CopyOnWriteArrayList<Feature> features;
     public static Gui clickGui;
+    public static Route route = new Route();
     public static ModHider modHider= new ModHider();
     public static CustomName customRank = new CustomName();
     public static boolean devMode;
@@ -52,6 +53,7 @@ public class Insanity {
         Insanity.features.add(modHider);
         Insanity.features.add(new EasyAOTV());
         Insanity.features.add(customRank);
+        Insanity.features.add(route);
 //        Insanity.loadKeybinds();
         for(Feature f: Insanity.features){
             MinecraftForge.EVENT_BUS.register(f);
@@ -64,6 +66,7 @@ public class Insanity {
 
         ConfigManager.loadConfig();
         Fonts.bootstrap();
+
     }
 
     @Mod.EventHandler
