@@ -6,6 +6,7 @@ import me.starzebra.config.ConfigManager;
 import me.starzebra.features.AutoClicker;
 import me.starzebra.features.ItemUpdateFix;
 import me.starzebra.features.feature.*;
+import me.starzebra.utils.BindUtils;
 import me.starzebra.utils.RotationUtils;
 import me.starzebra.utils.font.Fonts;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import java.io.File;
@@ -54,6 +56,7 @@ public class Insanity {
         Insanity.features.add(new EasyAOTV());
         Insanity.features.add(customRank);
         Insanity.features.add(route);
+        Insanity.features.add(new ToggleBreak());
 //        Insanity.loadKeybinds();
         for(Feature f: Insanity.features){
             MinecraftForge.EVENT_BUS.register(f);
@@ -66,6 +69,10 @@ public class Insanity {
 
         ConfigManager.loadConfig();
         Fonts.bootstrap();
+
+        BindUtils.registerBinds(
+                new BindUtils.Bind(Keyboard.KEY_NONE, "Break")
+        );
 
     }
 
@@ -87,25 +94,7 @@ public class Insanity {
         }
     }
 
-//    private static void loadKeybinds() {
-//        try {
-//            File oringoKeybinds = new File(Insanity.mc.mcDataDir.getPath() + "/config/Insanity/InsanityKeybinds.cfg");
-//            if (!oringoKeybinds.exists()) {
-//                oringoKeybinds.createNewFile();
-//            } else {
-//                DataInputStream dataInputStream = new DataInputStream(Files.newInputStream(Paths.get(Insanity.mc.mcDataDir.getPath() + "/config/Insanity/InsanityKeybinds.cfg")));
-//                int h = dataInputStream.readInt();
-//                for (int i = 0; i < h; ++i) {
-//                    String name = dataInputStream.readUTF();
-//                    features.add(new Keybind(name));
-//                }
-//                dataInputStream.close();
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event){

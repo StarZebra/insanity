@@ -7,6 +7,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.awt.*;
+import java.awt.event.InputEvent;
+
 public class AutoClicker extends Feature {
 
     private static long nextleftClick = System.currentTimeMillis();
@@ -27,14 +30,13 @@ public class AutoClicker extends Feature {
     }
 
     @SubscribeEvent
-    public void onRender(RenderWorldLastEvent event){
+    public void onRender(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
         if(mc.thePlayer == null) return;
         if(mc.currentScreen != null && mc.thePlayer.isUsingItem()) return;
         long nowMillis = System.currentTimeMillis();
         if(this.isToggled() && mc.gameSettings.keyBindAttack.isKeyDown() && nowMillis >= nextleftClick){
             ReflectionUtils.click(ReflectionUtils.ClickType.LEFT);
-
         }
 
     }

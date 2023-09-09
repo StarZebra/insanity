@@ -21,7 +21,7 @@ public class SetRotationCommand extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/setrot <yaw> <pitch>";
+        return "/setrot <yaw> <pitch> <setspawn>";
     }
 
     @Override
@@ -34,6 +34,7 @@ public class SetRotationCommand extends CommandBase {
         String yaw = args[0];
 
         if(yaw.matches("[a-z]+")) return;
+
         float newYaw = Float.parseFloat(yaw);
         float newPitch = player.rotationPitch;
 
@@ -52,11 +53,26 @@ public class SetRotationCommand extends CommandBase {
 
         RotationUtils.Rotation rotation = new RotationUtils.Rotation(newPitch, newYaw);
 
-        RotationUtils.smartLook(rotation, 7, () -> {});
+        RotationUtils.smartLook(rotation, 10, () -> {});
 
         DecimalFormat df = new DecimalFormat("#.#");
 
         player.addChatMessage(new ChatComponentText("§f[§4I§f] Yaw: " + newYaw + " Pitch: " + df.format(newPitch)));
+
+        if(args.length <= 2) return;
+        String willSetSpawn = args[2];
+        if(willSetSpawn == null) return;
+        if (willSetSpawn.equals("t")) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(600);
+                    player.sendChatMessage("/setspawn");
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
+
+        }
 
     }
 
